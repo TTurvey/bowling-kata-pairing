@@ -4,16 +4,39 @@ public class Bowling {
         return 0;
     }
 
-    public int scoreCalculus(String pins) {
-        String[] frame = pins.split("");
+    public int scoreCalculus(String match) {
+        String[] frames = match.split("[|]");
+
         int sum = 0;
-        for( String number : frame ){
-            if (number.equals("X")) {
-                return 10;
+        int doubler = 0;
+        int nextDoubler = 0;
+        for (String frame : frames) {
+            String[] pins = frame.split("");
+
+            int frameSum = 0;
+            for( String number : pins ) {
+
+                if (number.equals("X")) {
+                    frameSum = 10;
+                    nextDoubler = 2;
+                    break;
+                }
+                if (number.equals("/")) {
+                    frameSum = 10;
+                    break;
+                }
+                if (number.equals("-"))
+                    continue;
+
+                if (doubler > 0) {
+                    frameSum += Integer.parseInt(number) * 2;
+                    doubler--;
+                }
+                else
+                    frameSum += Integer.parseInt(number);
             }
-            if (number.equals("-"))
-                continue;
-            sum += Integer.parseInt(number);
+            sum += frameSum;
+            doubler = nextDoubler;
         }
 
         return sum;
