@@ -5,9 +5,17 @@ public class Bowling {
     }
 
     public int scoreCalculus(String pins) {
-        if (pins.equals("-"))
-            return 0;
+        String[] frame = pins.split("");
+        int sum = 0;
+        for( String number : frame ){
+            if (number.equals("X")) {
+                return 10;
+            }
+            if (number.equals("-"))
+                continue;
+            sum += Integer.parseInt(number);
+        }
 
-        return Integer.parseInt(pins);
+        return sum;
     }
 }

@@ -6,12 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BowlingTest {
 
-
-    @Test
-    public void should_return_0_when_no_pins_hit() {
-        assertEquals(0, new Bowling().scoreCalculus("0"));
-    }
-
     @ParameterizedTest
     @CsvSource({
             "1,1",
@@ -32,5 +26,17 @@ public class BowlingTest {
     public void should_return_zero_when_miss() {
         assertEquals(0, new Bowling().scoreCalculus("-"));
     }
+
+    @Test
+    public void should_return_sum_of_frame() {
+        assertEquals(8, new Bowling().scoreCalculus("17"));
+    }
+
+    @Test
+    public void should_return_10_when_strike() {
+        assertEquals(10, new Bowling().scoreCalculus("X"));
+    }
+
+
 }
 
